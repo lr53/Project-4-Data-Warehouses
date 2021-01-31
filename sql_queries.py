@@ -59,7 +59,7 @@ songplay_table_create = ("""
 CREATE TABLE IF NOT EXISTS songplay(
     songplay_id INTEGER IDENTITY (0,1) PRIMARY KEY,
     start_time TIMESTAMP,
-    user_id INTEGER,
+    user_id VARCHAR,
     level VARCHAR,
     song_id VARCHAR,
     artist_id VARCHAR,
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS songplay(
 
 user_table_create = ("""
 CREATE TABLE IF NOT EXISTS users(
-    user_id INTEGER PRIMARY KEY,
+    user_id VARCHAR PRIMARY KEY,
     first_name VARCHAR,
     last_name VARCHAR,
     gender CHAR(1),
@@ -134,18 +134,19 @@ FORMAT AS json 'auto';
 
 songplay_table_insert = ("""
     INSERT INTO songplay (start_time, user_id, level, song_id, artist_id, session_id, location, user_agent)
-    SELECT se.ts,
-           se.userId,
-           se.level,
-           ss.song_id,
-           ss.artist_id,
-           se.sessionId,
-           se.location,
-           se.userAgent
-    FROM staging_events se
-    JOIN staging_songs ss
-    ON (se.song = ss.title) AND (se.artist = ss.artist_name) AND (se.length = ss.duration)
-    WHERE se.page='NextSong'
+    SELECT DISTINCT TIMESTAMP 'epoch' + (se.ts / 1000) * INTERVAL '1 second' as start_time,
+        se.userId,
+        se.level,
+        ss.song_id,
+        ss.artist_id,
+        se.sessionId,
+        se.location,
+        se.userAgent
+
+    FROM staging_songs ss
+    INNER JOIN staging_events se
+    ON (ss.title = se.song AND se.artist = ss.artist_name)
+    AND se.page = 'NextSong'
 ;
 """)
 
@@ -154,12 +155,12 @@ user_table_insert = ("""
     SELECT DISTINCT userId, firstName, lastName, gender, level
     FROM staging_events
     WHERE page = 'NextSong'
-    AND user_id NOT IN (SELECT DISTINCT user_id FROM user)
+    AND userId IS NOT NULL;
 ;
 """)
 
 song_table_insert = ("""
-    INSERT INTO song (song_id, title, artist, year, duration)
+    INSERT INTO song (song_id, title, artist_id, year, duration)
     SELECT song_id, title, artist_name, year, duration
     FROM staging_songs
 ;
@@ -167,7 +168,7 @@ song_table_insert = ("""
 
 artist_table_insert = ("""
     INSERT INTO artist (artist_id, name, location, latitude, longitude)
-    SELECT DISTINCT artist_id, artist_name, artist_location, artist_longitude
+    SELECT DISTINCT artist_id, artist_name, artist_location, artist_latitude, artist_longitude
     FROM staging_songs
 ;
 """)
