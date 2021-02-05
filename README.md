@@ -10,8 +10,8 @@ The main focus of the project is to build an ETL pipeline that extracts the abov
 ### Schema
 #### Fact Table
 
-**Songplay** – Record event data associated with song plays. Columns include
-Songplay_id
+**Songplay** – Record event data associated with song plays. Columns include \
+Songplay_id \
 Start_time
 User_id
 Level
