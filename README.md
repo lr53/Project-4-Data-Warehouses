@@ -19,7 +19,7 @@ Song_id \
 Artist_id \
 Session_id \
 Location \
-User_agent\
+User_agent
 
 #### Dimension tables
 **Users** \
@@ -27,14 +27,14 @@ User_id \
 First_name \
 Last_name \
 Gender \
-Level \
+Level 
 
 **Songs** \
 Song_id \
 Title \
 Artist_id \
 Year \
-Duration \
+Duration 
 
 **Artists** \
 Artist_id \
@@ -42,7 +42,7 @@ Name	\
 Location \
 Latitude \
 Longitude \
-Time \
+Time 
  
 **Start_time** \
 Hour \
@@ -50,6 +50,6 @@ Day \
 Week \
 Month \
 Year \
-Weekday \
+Weekday 
 
 
