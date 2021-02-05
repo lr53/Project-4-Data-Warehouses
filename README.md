@@ -38,7 +38,7 @@ Duration
 
 **Artists** \
 Artist_id \
-Name	\ 
+Name	\
 Location \
 Latitude \
 Longitude \
