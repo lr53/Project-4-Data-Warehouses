@@ -7,8 +7,8 @@ Sparkify, a music streaming app want to move their processes and data into the c
 ### Project
 The main focus of the project is to build an ETL pipeline that extracts the above data in S3, stages them in Redshift and transforms data into a set of dimensional tables for the analytics team to keep driving insights from the data. 
 
-###Schema
-####Fact Table
+### Schema
+#### Fact Table
 
 **Songplay** – Record event data associated with song plays. Columns include
 Songplay_id
@@ -21,7 +21,7 @@ Session_id
 Location
 User_agent
 
-####Dimension tables
+#### Dimension tables
 **Users** 
 User_id
 First_name
