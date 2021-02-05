@@ -12,44 +12,44 @@ The main focus of the project is to build an ETL pipeline that extracts the abov
 
 **Songplay** – Record event data associated with song plays. Columns include \
 Songplay_id \
-Start_time
-User_id
-Level
-Song_id
-Artist_id
-Session_id
-Location
-User_agent
+Start_time \
+User_id \
+Level \
+Song_id \
+Artist_id \
+Session_id \
+Location \
+User_agent\
 
 #### Dimension tables
-**Users** 
-User_id
-First_name
-Last_name
-Gender
-Level
+**Users** \
+User_id \
+First_name \
+Last_name \
+Gender \
+Level \
 
-**Songs**
-Song_id
-Title
-Artist_id
-Year
-Duration
+**Songs** \
+Song_id \
+Title \
+Artist_id \
+Year \
+Duration \
 
-**Artists**
-Artist_id
-Name	
-Location
-Latitude
-Longitude
-Time
-
-**Start_time**
-Hour
-Day
-Week
-Month
-Year
-Weekday
+**Artists** \
+Artist_id \
+Name	\ 
+Location \
+Latitude \
+Longitude \
+Time \
+ 
+**Start_time** \
+Hour \
+Day \
+Week \
+Month \
+Year \
+Weekday \
 
 
